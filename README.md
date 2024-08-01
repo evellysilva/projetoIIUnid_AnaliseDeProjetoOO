@@ -1,4 +1,4 @@
-# Projeto Avaliativo da IIº unidade da disciplina de Analise De Projetos OO
+# Projeto Avaliativo da IIº unidade da disciplina de Análise De Projetos OO
 
 um CRUD, em Java, de uma entidade (livro) e 4 atributos;
 
