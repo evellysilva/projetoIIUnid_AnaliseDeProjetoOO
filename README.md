@@ -1,6 +1,6 @@
 # Projeto Avaliativo da IIº unidade da disciplina de Análise De Projetos OO
 
-um CRUD, em Java, de uma entidade (livro) e 4 atributos;
+um CRUD, em Java, de uma entidade (salão) e 4 atributos;
 
 Padros de projetos: 
 * Arquitetura em camadas (apresentação, negócio e persistência);
