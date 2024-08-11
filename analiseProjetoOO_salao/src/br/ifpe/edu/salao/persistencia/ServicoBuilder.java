@@ -3,9 +3,15 @@ package br.ifpe.edu.salao.persistencia;
 import br.ifpe.edu.salao.Servico;
 
 public class ServicoBuilder {
+    private int id;
 	private String nome;
     private double preco;
     private String descricao;
+
+    public ServicoBuilder setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     public ServicoBuilder setNome(String nome) {
         this.nome = nome;
@@ -23,6 +29,6 @@ public class ServicoBuilder {
     }
 
     public Servico build() {
-        return new Servico(nome, preco, descricao);
+        return new Servico(id, nome, preco, descricao);
     }
 }

@@ -29,7 +29,7 @@ public class SalaoControlador {
         return servicoDAO.buscar(id);
     }
 
-    public List<Servico> listarServicos() {
+    public List<Servico> listarTodosServicos() {
         return servicoDAO.listarTudo();
     }
 }

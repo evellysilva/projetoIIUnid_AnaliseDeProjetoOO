@@ -6,10 +6,15 @@ public class SalaoDecorator extends Servico {
     protected Servico servico;
 
     public SalaoDecorator(Servico servico) {
-        super(servico.getNome(), servico.getPreco(), servico.getDescricao());
+        super(servico.getId(), servico.getNome(), servico.getPreco(), servico.getDescricao());
         this.servico = servico;
     }
 
+    @Override
+    public int getId() {
+        return servico.getId();
+    }
+    
     @Override
     public double getPreco() {
         return servico.getPreco();
