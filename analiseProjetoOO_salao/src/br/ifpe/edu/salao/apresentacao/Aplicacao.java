@@ -67,9 +67,9 @@ public class Aplicacao {
             scanner.nextLine();
 
             System.out.println("Escolha o tipo de pacote:");
-            System.out.println("1. Pacote Noiva");
-            System.out.println("2. Pacote Debutante");
-            System.out.println("3. Nenhum");
+            System.out.println("1 para Pacote de Noiva");
+            System.out.println("2 para  Pacote de Debutante");
+            System.out.println("3 para Nenhum (servico basico)");
 
             int tipoPacote = scanner.nextInt();
             scanner.nextLine(); 
@@ -99,7 +99,7 @@ public class Aplicacao {
     private static void atualizarServico(Scanner scanner, SalaoControlador controlador) {
         System.out.println("Digite o código de identificação do serviço que deseja atualizar:");
 	        int id = scanner.nextInt();
-	        scanner.nextLine(); 
+	        scanner.nextLine();
 
 	        Servico servico = controlador.buscarServico(id);
 	        if (servico == null) {
@@ -123,7 +123,6 @@ public class Aplicacao {
 
 	        controlador.atualizarServico(servico);
 	        System.out.println("Serviço atualizado com sucesso!");
-        
     }
 
 	private static void removerServico(Scanner scanner, SalaoControlador controlador) {
@@ -172,10 +171,6 @@ public class Aplicacao {
                 System.out.println("------------------------");
             }
         }
-      }
-		
-	}
-
-    
     }
+}
 
