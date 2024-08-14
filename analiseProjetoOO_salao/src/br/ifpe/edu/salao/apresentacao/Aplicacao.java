@@ -98,31 +98,30 @@ public class Aplicacao {
 	}
     private static void atualizarServico(Scanner scanner, SalaoControlador controlador) {
         System.out.println("Digite o código de identificação do serviço que deseja atualizar:");
-	        int id = scanner.nextInt();
-	        scanner.nextLine();
-
-	        Servico servico = controlador.buscarServico(id);
-	        if (servico == null) {
-	            System.out.println("Serviço não encontrado.");
-	            return;
-	        }
-
-	        System.out.println("Digite o novo nome do serviço:");
-	        String nome = scanner.nextLine();
-
-	        System.out.println("Digite a nova descrição do serviço:");
-	        String descricao = scanner.nextLine();
-
-	        System.out.println("Digite o novo preço do serviço:");
-	        double preco = scanner.nextDouble();
-	        scanner.nextLine();
-
-	        servico.setNome(nome);
-	        servico.setPreco(preco);
-            servico.setDescricao(descricao);
-
-	        controlador.atualizarServico(servico);
-	        System.out.println("Serviço atualizado com sucesso!");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        
+        Servico servico = controlador.buscarServico(id);
+        if (servico == null) {
+            System.out.println("Serviço não encontrado.");
+            return;
+        }
+        System.out.println("Digite o novo nome do serviço:");
+        String nome = scanner.nextLine();
+        
+        System.out.println("Digite a nova descrição do serviço:");
+        String descricao = scanner.nextLine();
+        
+        System.out.println("Digite o novo preço do serviço:");
+        double preco = scanner.nextDouble();
+        scanner.nextLine();
+        
+        servico.setNome(nome);
+        servico.setPreco(preco);
+        servico.setDescricao(descricao);
+        
+        controlador.atualizarServico(servico);
+        System.out.println("Serviço atualizado com sucesso!");
     }
 
 	private static void removerServico(Scanner scanner, SalaoControlador controlador) {
