@@ -1,13 +1,17 @@
 package br.ifpe.edu.salao.apresentacao;
 
+import java.util.List;
 import java.util.Scanner;
 
+import br.ifpe.edu.salao.Servico;
 import br.ifpe.edu.salao.negocio.DAOFactory;
+import br.ifpe.edu.salao.negocio.PacoteDebutante;
+import br.ifpe.edu.salao.negocio.PacoteNoiva;
 
 public class Aplicacao {
 
     public static void iniciar() {
-    	DAOFactory factory = DAOFactory.getInstance();
+        DAOFactory factory = DAOFactory.getInstance();
         SalaoControlador controlador = new SalaoControlador(factory.criarDAO());
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -50,11 +54,11 @@ public class Aplicacao {
         scanner.close();
     }
 
-	private static void criarServico(Scanner scanner, SalaoControlador controlador) {
-		try {
+    private static void criarServico(Scanner scanner, SalaoControlador controlador) {
+        try {
             System.out.println("Digite o codigo de identificação do serviço:");
             int id = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             System.out.println("Digite o nome do serviço:");
             String nome = scanner.nextLine();
@@ -72,7 +76,7 @@ public class Aplicacao {
             System.out.println("3 para Nenhum (servico basico)");
 
             int tipoPacote = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             Servico servico = new Servico(id, nome, preco, descricao);
 
@@ -94,13 +98,14 @@ public class Aplicacao {
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao criar serviço: " + e.getMessage());
         }
-		
-	}
+
+    }
+
     private static void atualizarServico(Scanner scanner, SalaoControlador controlador) {
         System.out.println("Digite o código de identificação do serviço que deseja atualizar:");
         int id = scanner.nextInt();
         scanner.nextLine();
-        
+
         Servico servico = controlador.buscarServico(id);
         if (servico == null) {
             System.out.println("Serviço não encontrado.");
@@ -108,24 +113,24 @@ public class Aplicacao {
         }
         System.out.println("Digite o novo nome do serviço:");
         String nome = scanner.nextLine();
-        
+
         System.out.println("Digite a nova descrição do serviço:");
         String descricao = scanner.nextLine();
-        
+
         System.out.println("Digite o novo preço do serviço:");
         double preco = scanner.nextDouble();
         scanner.nextLine();
-        
+
         servico.setNome(nome);
         servico.setPreco(preco);
         servico.setDescricao(descricao);
-        
+
         controlador.atualizarServico(servico);
         System.out.println("Serviço atualizado com sucesso!");
     }
 
-	private static void removerServico(Scanner scanner, SalaoControlador controlador) {
-		System.out.println("Digite o ID do serviço que deseja remover:");
+    private static void removerServico(Scanner scanner, SalaoControlador controlador) {
+        System.out.println("Digite o ID do serviço que deseja remover:");
         int id = scanner.nextInt();
         scanner.nextLine();
 
@@ -139,8 +144,8 @@ public class Aplicacao {
         System.out.println("Serviço removido com sucesso!");
     }
 
-	private static void buscarServico(Scanner scanner, SalaoControlador controlador) {
-		System.out.println("Digite o codigo de identificação do serviço que deseja buscar:");
+    private static void buscarServico(Scanner scanner, SalaoControlador controlador) {
+        System.out.println("Digite o codigo de identificação do serviço que deseja buscar:");
         int id = scanner.nextInt();
         scanner.nextLine();
 
@@ -154,10 +159,10 @@ public class Aplicacao {
         } else {
             System.out.println("Serviço não encontrado.");
         }
-	}
+    }
 
-	private static void listarTodosServicos(SalaoControlador controlador) {
-		List<Servico> servicos = controlador.listarTodosServicos();
+    private static void listarTodosServicos(SalaoControlador controlador) {
+        List<Servico> servicos = controlador.listarTodosServicos();
         if (servicos.isEmpty()) {
             System.out.println("Nenhum serviço encontrado.");
         } else {
@@ -172,4 +177,3 @@ public class Aplicacao {
         }
     }
 }
-
