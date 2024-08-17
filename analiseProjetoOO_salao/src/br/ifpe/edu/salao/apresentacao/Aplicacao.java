@@ -7,6 +7,9 @@ import br.ifpe.edu.salao.Servico;
 import br.ifpe.edu.salao.negocio.DAOFactory;
 import br.ifpe.edu.salao.negocio.PacoteDebutante;
 import br.ifpe.edu.salao.negocio.PacoteNoiva;
+import br.ifpe.edu.salao.negocio.ServicoAdapter;
+import br.ifpe.edu.salao.negocio.ServicoDomicilio;
+import br.ifpe.edu.salao.negocio.ServicoEvento;
 
 public class Aplicacao {
 
@@ -78,6 +81,14 @@ public class Aplicacao {
             int tipoPacote = scanner.nextInt();
             scanner.nextLine();
 
+            System.out.println("Escolha o tipo de serviço:");
+            System.out.println("1 para Serviço Básico");
+            System.out.println("2 para Serviço a Domicílio");
+            System.out.println("3 para Serviço para Evento");
+
+            int tipoServico = scanner.nextInt();
+            scanner.nextLine();
+
             Servico servico = new Servico(id, nome, preco, descricao);
 
             switch (tipoPacote) {
@@ -88,6 +99,19 @@ public class Aplicacao {
                     servico = new PacoteDebutante(servico);
                     break;
                 case 3:
+                    break;
+                default:
+                    System.out.println("Opção inválida. Criando serviço básico.");
+            }
+
+            switch (tipoServico) {
+                case 1:
+                    break;
+                case 2:
+                    servico = new ServicoAdapter(servico, new ServicoDomicilio());
+                    break;
+                case 3:
+                    servico = new ServicoAdapter(servico, new ServicoEvento());
                     break;
                 default:
                     System.out.println("Opção inválida. Criando serviço básico.");
