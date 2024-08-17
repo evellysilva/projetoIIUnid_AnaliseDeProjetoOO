@@ -1,2 +1,0 @@
-module analiseProjetoOO_salao {
-}
