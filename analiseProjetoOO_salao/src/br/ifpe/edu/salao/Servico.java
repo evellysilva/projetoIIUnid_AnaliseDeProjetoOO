@@ -1,11 +1,17 @@
 package br.ifpe.edu.salao;
 
+import java.text.DecimalFormat;
+
+import br.ifpe.edu.salao.negocio.IServicoAdapter;
+import br.ifpe.edu.salao.negocio.ServicoAdapter;
+
 public class Servico{
 
     private int id;
     private String nome;
     private double preco;
     private String descricao;
+    private IServicoAdapter precoAdapter = new ServicoAdapter();
 
     // Construtor da classe Servico
     public Servico(int id, String nome, double preco, String descricao) {
@@ -47,12 +53,21 @@ public class Servico{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public IServicoAdapter getPrecoAdapter() {
+        return precoAdapter;
+    }
     
 
     // Representação em String do objeto Servico
     @Override
     public String toString() {
-        return "ID: " + id + ", Nome: " + nome + ", Preço: " + preco + ", Descrição: " + descricao;
+    DecimalFormat df = new DecimalFormat("#.00");
+        return "ID: " + id +
+        ", Nome: " + nome +
+        ", Preço: R$ " + df.format(preco) +
+        ", Preço em dólar: $ " + df.format(precoAdapter.getPrecoEmDolar(preco)) +
+        ", Descrição: " + descricao;
     }
 
 }
