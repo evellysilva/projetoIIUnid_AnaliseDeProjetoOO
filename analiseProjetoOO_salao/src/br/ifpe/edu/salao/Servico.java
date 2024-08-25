@@ -1,8 +1,9 @@
 package br.ifpe.edu.salao;
 
-public class Servico {
+public class Servico{
+
     private int id;
-	private String nome;
+    private String nome;
     private double preco;
     private String descricao;
 
@@ -13,7 +14,7 @@ public class Servico {
         this.preco = preco;
         this.descricao = descricao;
     }
-    
+
     // Getters e Setters para os atributos
     public int getId() {
         return id;
@@ -47,6 +48,7 @@ public class Servico {
         this.descricao = descricao;
     }
     
+
     // Representação em String do objeto Servico
     @Override
     public String toString() {

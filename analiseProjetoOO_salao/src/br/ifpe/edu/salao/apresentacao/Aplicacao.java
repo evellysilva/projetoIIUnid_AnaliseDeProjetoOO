@@ -1,22 +1,28 @@
 package br.ifpe.edu.salao.apresentacao;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Scanner;
+
+import br.ifpe.edu.salao.IServico;
 import br.ifpe.edu.salao.Servico;
 import br.ifpe.edu.salao.negocio.DAOFactory;
 import br.ifpe.edu.salao.negocio.PacoteDebutante;
 import br.ifpe.edu.salao.negocio.PacoteNoiva;
 import br.ifpe.edu.salao.negocio.ServicoAdapter;
-import br.ifpe.edu.salao.negocio.ServicoDomicilio;
-import br.ifpe.edu.salao.negocio.ServicoEvento;
 
 public class Aplicacao {
+	
+	private static Scanner scanner;
+	private static DecimalFormat df = new DecimalFormat("0.00");
 
     public static void iniciar() {
-        // Cria a fábrica de DAO e o controlador para gerenciar serviços
+        scanner = new Scanner(System.in);
         DAOFactory factory = DAOFactory.getInstance();
+        
         SalaoControlador controlador = new SalaoControlador(factory.criarDAO());
-        Scanner scanner = new Scanner(System.in);
+        
         boolean running = true;
+        
         while (running) {
             System.out.println("Escolha uma opção:");
             System.out.println("1. Criar Serviço");
@@ -63,21 +69,14 @@ public class Aplicacao {
             String descricao = scanner.nextLine();
             System.out.println("Digite o preço do serviço:");
             double preco = scanner.nextDouble();
+            
             scanner.nextLine();
+            
             System.out.println("Escolha o tipo de pacote:");
             System.out.println("1 para Pacote de Noiva");
             System.out.println("2 para  Pacote de Debutante");
             System.out.println("3 para Nenhum (servico basico)");
             int tipoPacote = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.println("Escolha o tipo de serviço:");
-            System.out.println("1 para Serviço Básico");
-            System.out.println("2 para Serviço a Domicílio");
-            System.out.println("3 para Serviço para Evento");
-
-            int tipoServico = scanner.nextInt();
-            scanner.nextLine();
 
             Servico servico = new Servico(id, nome, preco, descricao);
 
@@ -93,22 +92,10 @@ public class Aplicacao {
                 default:
                     System.out.println("Opção inválida. Criando serviço básico.");
             }
-
-            switch (tipoServico) {
-                case 1:
-                    break;
-                case 2:
-                    servico = new ServicoAdapter(servico, new ServicoDomicilio());
-                    break;
-                case 3:
-                    servico = new ServicoAdapter(servico, new ServicoEvento());
-                    break;
-                default:
-                    System.out.println("Opção inválida. Criando serviço básico.");
-            }
             
             controlador.criarServico(servico);
             System.out.println("Serviço criado com sucesso!");
+            
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao criar serviço: " + e.getMessage());
         }
@@ -132,8 +119,12 @@ public class Aplicacao {
         servico.setNome(nome);
         servico.setPreco(preco);
         servico.setDescricao(descricao);
+        
+        
         controlador.atualizarServico(servico);
-        System.out.println("Serviço atualizado com sucesso!");
+
+        System.out.println("Servi�o atualizado com sucesso!");
+    
     }
     private static void removerServico(Scanner scanner, SalaoControlador controlador) {
         System.out.println("Digite o ID do serviço que deseja remover:");
@@ -160,21 +151,30 @@ public class Aplicacao {
             System.out.println("Descrição: " + servico.getDescricao());
         } else {
             System.out.println("Serviço não encontrado.");
-        }
+            }
     }
+
     private static void listarTodosServicos(SalaoControlador controlador) {
+        System.out.println("O pagamento ser� em d�lares? (s/n):");
+        String pagamentoEmDolares = scanner.nextLine();
+        boolean emDolares = pagamentoEmDolares.equalsIgnoreCase("s");
+
         List<Servico> servicos = controlador.listarTodosServicos();
+        
         if (servicos.isEmpty()) {
-            System.out.println("Nenhum serviço encontrado.");
+            System.out.println("Nenhum servi�o encontrado.");
         } else {
-            System.out.println("Lista de serviços:");
+            System.out.println("Lista de servi�os:");
             for (Servico servico : servicos) {
+                IServico servicoAdaptado = new ServicoAdapter(servico, emDolares);
+                double preco = servicoAdaptado.preco();
+                String precoFormatado = df.format(preco);
                 System.out.println("ID: " + servico.getId());
                 System.out.println("Nome: " + servico.getNome());
-                System.out.println("Preço: " + servico.getPreco());
-                System.out.println("Descrição: " + servico.getDescricao());
+                System.out.println("Pre�o: " + preco);
+                System.out.println("Descri��o: " + servico.getDescricao());
                 System.out.println("------------------------");
             }
         }
     }
-}
+    }

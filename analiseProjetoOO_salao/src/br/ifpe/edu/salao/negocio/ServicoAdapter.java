@@ -1,26 +1,29 @@
 package br.ifpe.edu.salao.negocio;
 
+import br.ifpe.edu.salao.IServico;
 import br.ifpe.edu.salao.Servico;
-import br.ifpe.edu.salao.persistencia.ServicoExterno;
-//Classe ServicoAdapter que adapta um Servico para incluir funcionalidades adicionais de ServicoExterno
 
-public class ServicoAdapter extends Servico {
+public class ServicoAdapter implements IServico {
+	private Servico servico;
+    private boolean emDolares;
+    private static final double taxa_conversao = 5.50; 
+    
+    public ServicoAdapter(Servico servico, boolean emDolares) {
+        this.servico = servico;
+        this.emDolares = emDolares;
+    }
 
-    // Referência ao serviço externo que será adaptado
-    private ServicoExterno servicoExterno;
-
-    public ServicoAdapter(Servico servico, ServicoExterno servicoExterno) {
-        super(servico.getId(), servico.getNome(), servico.getPreco(), servico.getDescricao());
-        this.servicoExterno = servicoExterno;
+    @Override
+    public double preco() {
+        double precoEmReais = servico.getPreco();
+        if (emDolares) {
+            return precoEmReais / taxa_conversao;
+        }
+        return precoEmReais;
     }
 
     @Override
     public String getDescricao() {
-        return super.getDescricao() + " + " + servicoExterno.descricaoAdicional();
-    }
-
-    @Override
-    public double getPreco() {
-        return super.getPreco() + servicoExterno.custoAdicional();
+        return servico.getDescricao();
     }
 }
