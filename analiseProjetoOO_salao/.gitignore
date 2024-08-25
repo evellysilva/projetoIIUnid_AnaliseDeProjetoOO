@@ -1,0 +1,20 @@
+# Diretório de build
+/build/
+/target/
+/out/
+
+# Arquivos de configuração específicos da IDE
+/.idea/
+/*.iml
+*.classpath
+*.project
+*.settings/
+
+# Arquivos de log
+*.log
+
+# Arquivos gerados pela compilação
+*.class
+
+# metadata
+/metadata/
