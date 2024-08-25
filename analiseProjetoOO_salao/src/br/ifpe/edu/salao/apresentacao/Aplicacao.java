@@ -1,11 +1,13 @@
 package br.ifpe.edu.salao.apresentacao;
 
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Scanner;
+
 import br.ifpe.edu.salao.Servico;
 import br.ifpe.edu.salao.negocio.DAOFactory;
 import br.ifpe.edu.salao.negocio.PacoteDebutante;
 import br.ifpe.edu.salao.negocio.PacoteNoiva;
-import java.util.List;
-import java.util.Scanner;
 
 public class Aplicacao {
 
@@ -138,12 +140,13 @@ public class Aplicacao {
         int id = scanner.nextInt();
         scanner.nextLine();
         Servico servico = controlador.buscarServico(id);
+        DecimalFormat df = new DecimalFormat("#.00");
         if (servico != null) {
             System.out.println("Serviço encontrado:");
             System.out.println("ID: " + servico.getId());
             System.out.println("Nome: " + servico.getNome());
             System.out.println("Preço: " + servico.getPreco());
-            System.out.println("Preço em dólar: $" + servico.getPrecoAdapter().getPrecoEmDolar(servico.getPreco()));
+            System.out.println("Preço em dólar: $" + df.format(servico.getPrecoAdapter().getPrecoEmDolar(servico.getPreco())));
             System.out.println("Descrição: " + servico.getDescricao());
         } else {
             System.out.println("Serviço não encontrado.");

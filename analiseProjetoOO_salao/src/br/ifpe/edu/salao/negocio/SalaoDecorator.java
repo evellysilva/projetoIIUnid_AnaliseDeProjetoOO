@@ -1,5 +1,7 @@
 package br.ifpe.edu.salao.negocio;
 
+import java.text.DecimalFormat;
+
 import br.ifpe.edu.salao.Servico;
 
 public class SalaoDecorator extends Servico {
@@ -26,8 +28,10 @@ public class SalaoDecorator extends Servico {
     @Override
     public String toString() {
         // Retorna uma string que inclui o ID, nome, preço base e descrição do serviço
+        DecimalFormat df = new DecimalFormat("#.00");
         return "ID: " + getId() + ", Nome: " + getNome()
                 + ", Preço com Acréscimo: " + getPreco()
+                + ", Preço em dólar: $ " + df.format(servico.getPrecoAdapter().getPrecoEmDolar(getPreco()))
                 + ", Descrição: " + getDescricao();
     }
 }
